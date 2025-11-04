@@ -3,6 +3,9 @@
 
 set -e
 
+# SOPS test key fingerprint
+PGP_KEY_FINGERPRINT="FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4"
+
 echo "Creating sample encrypted configuration files..."
 echo
 
@@ -14,7 +17,7 @@ if ! command -v sops &> /dev/null; then
 fi
 
 # Check if GPG keys are imported
-if ! gpg --list-secret-keys | grep -q "FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4"; then
+if ! gpg --list-secret-keys | grep -q "$PGP_KEY_FINGERPRINT"; then
     echo "Warning: SOPS test keys not found in GPG keyring"
     echo "Importing test keys from repository..."
     if [ -f "../../pgp/sops_functional_tests_key.asc" ]; then
@@ -53,7 +56,7 @@ EOF
 
 # Encrypt JSON config
 echo "Encrypting JSON configuration with SOPS..."
-sops -e --pgp FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4 config.json > config.enc.json
+sops -e --pgp "$PGP_KEY_FINGERPRINT" config.json > config.enc.json
 rm config.json
 echo "  ✓ Created config.enc.json"
 
@@ -80,7 +83,7 @@ EOF
 
 # Encrypt YAML config
 echo "Encrypting YAML configuration with SOPS..."
-sops -e --pgp FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4 config.yaml > config.enc.yaml
+sops -e --pgp "$PGP_KEY_FINGERPRINT" config.yaml > config.enc.yaml
 rm config.yaml
 echo "  ✓ Created config.enc.yaml"
 
