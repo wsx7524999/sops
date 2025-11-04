@@ -1,0 +1,14 @@
+# Ignore decrypted configuration files
+config.json
+config.yaml
+*.dec.json
+*.dec.yaml
+
+# Ignore Go build artifacts
+go-integration
+*.exe
+*.test
+*.out
+
+# Ignore Go dependency cache
+go.sum
