@@ -6,9 +6,7 @@ config.yaml
 
 # Ignore Go build artifacts
 go-integration
+test-integration
 *.exe
 *.test
 *.out
-
-# Ignore Go dependency cache
-go.sum
