@@ -1,0 +1,12 @@
+# Ignore decrypted configuration files
+config.json
+config.yaml
+*.dec.json
+*.dec.yaml
+
+# Ignore Go build artifacts
+go-integration
+test-integration
+*.exe
+*.test
+*.out
